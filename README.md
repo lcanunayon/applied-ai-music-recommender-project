@@ -18,6 +18,8 @@ Replace this paragraph with your own summary of what your version does.
 ## How The System Works
 
 Explain your design in plain language.
+Real world recommendations work by comparing 2 different attributes to items, one comparison is through each user and what they also like. This is compared to everybody else. The other way it works is by comparing the actual song attributes to different ones, and these 2 comparisons are merged together to form the recommendation system. What my system will do is score songs by their attributes and similarities, and scores that are close together are songs that are going to be recommended along with another song. It score based on attributes like mood, genre, dancibility, etc. The separation of scoring songs and ranking  songs together are separated so that each implementation can be worked on individually. User profile store a score for each song, and compares songs to the users targets which are stored here as well. Choosing a song to recommend, we call score_song for every song in the catalog, sort the songs by descending score order, and return the top k songs.
+
 
 Some prompts to answer:
 
