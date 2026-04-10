@@ -22,6 +22,11 @@ Real world recommendations work by comparing 2 different attributes to items, on
 
 ![Terminal output showing top 4 recommendations](assets/screenshot.jpg)
 
+![High-Energy Pop profile results](assets/screeenhighenergypop.jpg)
+![Chill Lofi profile results](assets/chillofiscreen.jpg)
+![Deep Intense Rock profile results](assets/deenintense.jpg)
+![Conflicted Soul edge-case results](assets/conflict1screen.jpg)
+![Unknown Genre edge-case results](assets/unknowngenrescreen.jpg)
 
 Some prompts to answer:
 
