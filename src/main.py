@@ -158,7 +158,7 @@ def print_recommendations(user_prefs: dict, songs: list, k: int = 5) -> None:
 
     for rank, (song, score, explanation) in enumerate(recommendations, start=1):
         print(f"\n#{rank}  {song['title']}  —  {song['artist']}")
-        print(f"    Score  : {score:.2f} / 7.50")
+        print(f"    Score  : {score:.2f} / 8.00")
         print(f"    Genre  : {song['genre']}  |  Mood: {song['mood']}")
         print(f"    Why    : {explanation}")
 

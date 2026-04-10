@@ -67,26 +67,43 @@ def load_songs(csv_path: str) -> List[Dict]:
             })
     return songs
 
+# ---------------------------------------------------------------------------
+# EXPERIMENT: double energy weight, halve genre weight
+# Max score changes: 2.0+1.0+1.5+1.0+0.75+0.75+0.5 = 7.5  (original)
+#                   1.0+1.0+3.0+1.0+0.75+0.75+0.5 = 8.0  (experiment)
+# To revert, comment the EXPERIMENT lines and uncomment the ORIGINAL lines.
+# ---------------------------------------------------------------------------
+#_W_GENRE        = 1.0   # EXPERIMENT: halved  — original: 2.0
+_W_GENRE     = 2.0   # ORIGINAL
+#_W_ENERGY       = 3.0   # EXPERIMENT: doubled — original: 1.50
+_W_ENERGY     = 1.50  # ORIGINAL
+_W_MOOD         = 1.0
+_W_DANCEABILITY = 1.0
+_W_VALENCE      = 0.75
+_W_ACOUSTICNESS = 0.75
+_W_TEMPO        = 0.50
+# ---------------------------------------------------------------------------
+
 def score_song(song: Dict, user_prefs: Dict) -> float:
-    """Return a 0.0–7.5 match score: +2.0 genre, +1.0 mood, up to +4.5 numeric similarity."""
+    """Return a 0.0–8.0 match score: +genre, +1.0 mood, up to +6.0 numeric similarity."""
     score = 0.0
 
     # Categorical bonuses
     if song["genre"] == user_prefs["favorite_genre"]:
-        score += 2.0
+        score += _W_GENRE
     if song["mood"] == user_prefs["favorite_mood"]:
-        score += 1.0
+        score += _W_MOOD
 
     # Numeric similarity — each term is weight × (1 − absolute difference)
-    score += 1.50 * (1 - abs(song["energy"]       - user_prefs["target_energy"]))
-    score += 1.00 * (1 - abs(song["danceability"]  - user_prefs["target_danceability"]))
-    score += 0.75 * (1 - abs(song["valence"]       - user_prefs["target_valence"]))
-    score += 0.75 * (1 - abs(song["acousticness"]  - user_prefs["target_acousticness"]))
+    score += _W_ENERGY       * (1 - abs(song["energy"]       - user_prefs["target_energy"]))
+    score += _W_DANCEABILITY * (1 - abs(song["danceability"]  - user_prefs["target_danceability"]))
+    score += _W_VALENCE      * (1 - abs(song["valence"]       - user_prefs["target_valence"]))
+    score += _W_ACOUSTICNESS * (1 - abs(song["acousticness"]  - user_prefs["target_acousticness"]))
 
     # Normalize tempo to 0–1 before differencing (cap assumed at 200 BPM)
     tempo_norm   = song["tempo_bpm"]              / 200
     target_tempo = user_prefs["target_tempo_bpm"] / 200
-    score += 0.50 * (1 - abs(tempo_norm - target_tempo))
+    score += _W_TEMPO * (1 - abs(tempo_norm - target_tempo))
 
     return round(score, 4)
 

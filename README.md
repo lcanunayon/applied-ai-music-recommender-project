@@ -149,7 +149,7 @@ Describe your scoring logic in plain language.
 - What information about the user does it use
 - How does it turn those into a number
 
-Try to avoid code in this section, treat it like an explanation to a non programmer.
+
 
 The algorithm works by scoring songs based on a users preferred song profile and songs with their attributes. It ranks these songs and their score based on how close they are to the users preferrences, and sorts all of these songs in descending order of score. The top k (usually 5) songs are picked and recommended to the user.
 
@@ -162,7 +162,9 @@ Describe your dataset.
 - What kinds of genres or moods are represented
 - Whose taste does this data mostly reflect
 
----
+18 songs are in songs.csv. I added a couple more songs to the original. Some genres represented is rock, pop, lofi, r&b. Some moods are happy, sad, hype, chill, focused, etc. This taste mostly reflects a pop taste as there is mostly pop type songs and the user profile is pop as well.
+
+
 
 ## 5. Strengths
 
@@ -173,7 +175,7 @@ You can think about:
 - Particular user profiles it served well
 - Simplicity or transparency benefits
 
----
+My recommender works well for differentiates similar songs and giving them a concise and accurate ranking for them. It is simple and easy to use, and it served user profiles extremely well.
 
 ## 6. Limitations and Bias
 
@@ -185,7 +187,7 @@ Some prompts:
 - Is it biased toward high energy or one genre by default
 - How could this be unfair if used in a real product
 
----
+Some of the songs dont seem to be right by intuitition, but they are mathematically correct, which is not so much an issue. The real issue is a catalog representation bias, as a genre like lofi has a more differentiated and quality recommendation compared to the other genres other than pop, which is slightly less differentiated. Lofi song matching is more fleshed out and has more songs to recommend to the user.
 
 ## 7. Evaluation
 
@@ -196,21 +198,20 @@ Examples:
 - You compared your simulation to what a real app like Spotify or YouTube tends to recommend
 - You wrote tests for your scoring logic
 
-You do not need a numeric metric, but if you used one, explain what it measures.
 
----
+I tried multiple user profiles, making sure that the results matched expectations from the songs I already have. I also wrote tests for the scoring logic to make sure the scoring was accurate and expected.
 
 ## 8. Future Work
 
 If you had more time, how would you improve this recommender
 
-Examples:
+Examples: 
 
 - Add support for multiple users and "group vibe" recommendations
 - Balance diversity of songs instead of always picking the closest match
 - Use more features, like tempo ranges or lyric themes
 
----
+I would improve this recommender for adding other users and being able to recommend songs based on the whole group and all of their attributes combined. Also, I would try to add more features like lyric themes and sharing of recommendations to others.
 
 ## 9. Personal Reflection
 
@@ -220,3 +221,4 @@ A few sentences about what you learned:
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
 
+Id say the biggest learning moment I learned during this project is using AI to explain to me a system and algorithm so I could understand it better and give it implementation and features that I wouldnt have thought otherwise. What surprised me about this system is how accurate it was, especially with the various fields that songs could be rated on. AI tools helped me in this learning aspect, but I had to double check the AI when creating actual logic for the app and ideas. I thought real music recommenders were not as complicated as this, and for a 1% version for something like what Spotify uses, I feel that this can pretty accurately rank a lot of songs already. I was surprised this small algorithm still felt like a full fledged recommender. I think human judgement still matters with intuitive grouping of songs in specific genres, as some fields may sway one result and put a song where it really should not be. If i extended this project, I would definitely try to add a group function with real users, with a UI element.
