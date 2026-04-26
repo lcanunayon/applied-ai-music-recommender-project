@@ -1,0 +1,122 @@
+{
+  "genres": {
+    "pop": {
+      "description": "Pop music emphasizes catchy hooks, polished production, and broad appeal. Typically high energy and danceability with positive valence. Production is heavily processed and electronic.",
+      "typical_use": "parties, workouts, upbeat daily activities, social settings"
+    },
+    "lofi": {
+      "description": "Lo-fi hip hop uses deliberately warm, imperfect production — vinyl crackle, muffled drums, jazzy chords. Intentionally low energy and slow tempo promote focus without distraction.",
+      "typical_use": "studying, late-night work, relaxed background listening"
+    },
+    "rock": {
+      "description": "Rock music features distorted guitars, strong rhythmic drive, and high energy. Emphasizes raw power and emotional directness. Low acousticness, high intensity.",
+      "typical_use": "workouts, driving, intense focus, emotional release"
+    },
+    "ambient": {
+      "description": "Ambient music prioritizes texture and atmosphere over melody or rhythm. Very low energy, high acousticness, slow or no discernible tempo — designed to blend into the environment.",
+      "typical_use": "meditation, deep focus, sleep, background atmosphere"
+    },
+    "jazz": {
+      "description": "Jazz features improvisation, complex harmonies, and organic instrumentation. Generally acoustic with moderate tempo, warm energy, and high valence. Sophisticated and expressive.",
+      "typical_use": "coffee shops, relaxed evenings, creative work, winding down"
+    },
+    "synthwave": {
+      "description": "Synthwave uses 80s-inspired analog synthesizers and electronic drum machines. Medium-high energy with a nostalgic, cinematic, slightly dark mood. Consistent driving tempo.",
+      "typical_use": "night drives, retro aesthetics, focused work, gaming"
+    },
+    "indie pop": {
+      "description": "Indie pop blends accessible melodies with independent production sensibilities. Moderate energy, often emotionally nuanced with strong hooks and a personal, unpolished charm.",
+      "typical_use": "casual listening, road trips, creative sessions"
+    },
+    "classical": {
+      "description": "Classical music features orchestral or acoustic instruments with formal compositional structure. Very low energy, very high acousticness, wide emotional dynamic range from serene to powerful.",
+      "typical_use": "studying, relaxation, emotional reflection, focus"
+    },
+    "hip-hop": {
+      "description": "Hip-hop centers on rhythmic vocal delivery over produced beats. High danceability and energy; often bold and confident in tone. Low acousticness, heavy bass presence.",
+      "typical_use": "hype sessions, parties, workouts, commutes"
+    },
+    "r&b": {
+      "description": "R&B blends soulful vocals with groove-oriented production. Moderate energy with high valence and danceability. Emotionally expressive, warm, and intimate.",
+      "typical_use": "relaxed evenings, romantic settings, chill playlists"
+    },
+    "country": {
+      "description": "Country music features acoustic instruments, storytelling lyrics, and nostalgic themes. Moderate energy with warm, organic production and high acousticness.",
+      "typical_use": "road trips, outdoor activities, reflective moods"
+    },
+    "metal": {
+      "description": "Metal features high-gain guitars, aggressive rhythms, and extreme energy. Very low valence and acousticness. Designed for maximum intensity, power, and adrenaline.",
+      "typical_use": "intense workouts, emotional release, high-adrenaline activities"
+    },
+    "latin": {
+      "description": "Latin music emphasizes rhythm, percussion, and danceable grooves. High energy and danceability with uplifting, social energy. Strong percussive drive and vibrant arrangements.",
+      "typical_use": "dancing, parties, celebrations, upbeat social settings"
+    },
+    "folk": {
+      "description": "Folk music uses acoustic instrumentation and narrative, intimate songwriting. Low energy and very high acousticness. Emotionally honest and introspective.",
+      "typical_use": "quiet evenings, emotional processing, introspective moods"
+    },
+    "dream pop": {
+      "description": "Dream pop layers reverb-heavy, atmospheric production over melodic songwriting. Medium energy with a hazy, introspective quality. Blurs the line between waking and dreaming.",
+      "typical_use": "winding down, creative daydreaming, introspective listening"
+    }
+  },
+  "moods": {
+    "happy": {
+      "description": "Upbeat, bright, and celebratory. High valence songs that feel joyful and energizing. Associated with positive life moments and social connection.",
+      "best_for": "morning routines, social gatherings, motivation"
+    },
+    "chill": {
+      "description": "Relaxed and easygoing without being melancholic. Low pressure, comfortable energy that creates a safe, unhurried atmosphere.",
+      "best_for": "studying, unwinding, background listening"
+    },
+    "intense": {
+      "description": "High energy, driven, and powerful. Built for peak performance and maximum engagement. Demands full attention.",
+      "best_for": "workouts, competition, high-focus sprints"
+    },
+    "focused": {
+      "description": "Calm but mentally alert. Minimal distraction, steady energy that sustains concentration over long periods without fatigue.",
+      "best_for": "deep work, coding, writing, studying"
+    },
+    "relaxed": {
+      "description": "Gentle and unhurried. Lower arousal with a comfortable, warm quality. Promotes physical and mental rest.",
+      "best_for": "rest, slow mornings, winding down after a long day"
+    },
+    "moody": {
+      "description": "Atmospheric and introspective with a darker or more complex emotional texture. Not sad — more contemplative and layered.",
+      "best_for": "late nights, creative work, emotional processing"
+    },
+    "melancholic": {
+      "description": "Bittersweet and reflective. Acknowledges sadness without being overwhelmingly dark. Nostalgic and tender.",
+      "best_for": "emotional reflection, rainy days, introspective moments"
+    },
+    "hype": {
+      "description": "Energetic, loud, and motivating. Designed to build excitement and momentum rapidly. Pushes you to move.",
+      "best_for": "pre-game warmup, parties, high-intensity workouts"
+    },
+    "romantic": {
+      "description": "Warm, intimate, and emotionally expressive. Creates a personal, connected atmosphere between people.",
+      "best_for": "dates, intimate settings, emotional moments"
+    },
+    "nostalgic": {
+      "description": "Evokes vivid memories and a sense of the past. Bittersweet warmth tied to places, people, or times gone by.",
+      "best_for": "reflection, reminiscing, long drives"
+    },
+    "angry": {
+      "description": "Raw, aggressive emotional energy. High intensity with low valence. Channels frustration and tension outward.",
+      "best_for": "releasing frustration, intense workouts, venting"
+    },
+    "uplifting": {
+      "description": "Hopeful and inspiring. Builds emotional momentum toward positivity and possibility. Feels forward-looking.",
+      "best_for": "motivation, recovery, starting fresh"
+    },
+    "sad": {
+      "description": "Low energy and low valence. Emotionally heavy and introspective. Validates difficult feelings without trying to fix them.",
+      "best_for": "processing grief, emotional catharsis, rainy days"
+    },
+    "dreamy": {
+      "description": "Hazy, atmospheric, and otherworldly. Blurs the line between focus and reverie. Soft edges, floating quality.",
+      "best_for": "creative daydreaming, winding down, introspective listening"
+    }
+  }
+}

@@ -5,6 +5,9 @@ import time
 import logging
 import anthropic
 
+_PROFILES_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "genre_profiles.json")
+_profiles_cache: dict | None = None
+
 _client: anthropic.Anthropic | None = None
 
 # ---------------------------------------------------------------------------
@@ -37,12 +40,49 @@ Respond with ONLY this JSON (no markdown, no extra text):
   "reason": string — one concise sentence
 }"""
 
+RATE_SYSTEM = """You are evaluating the quality of a single music recommendation explanation.
+
+Score it 1–10 using these criteria:
+- Specificity: does it reference actual song features (energy, tempo, mood, genre)?
+- Relevance: does it clearly connect to what the user asked for?
+- Helpfulness: would it give the user a real reason to want to listen?
+
+Respond with ONLY this JSON (no markdown, no extra text):
+{"score": integer 1-10, "reason": "one sentence"}"""
+
 
 def _get_client() -> anthropic.Anthropic:
     global _client
     if _client is None:
         _client = anthropic.Anthropic()
     return _client
+
+
+def _load_profiles() -> dict:
+    global _profiles_cache
+    if _profiles_cache is None:
+        try:
+            with open(_PROFILES_PATH, encoding="utf-8") as f:
+                _profiles_cache = json.load(f)
+        except Exception:
+            _profiles_cache = {"genres": {}, "moods": {}}
+    return _profiles_cache
+
+
+def _build_profile_context(top_songs: list) -> str:
+    """Return genre/mood profile text for the unique genres and moods present in top_songs."""
+    profiles = _load_profiles()
+    seen_genres: dict[str, str] = {}
+    seen_moods: dict[str, str] = {}
+    for s in top_songs:
+        g, m = s["genre"], s["mood"]
+        if g not in seen_genres and g in profiles["genres"]:
+            seen_genres[g] = profiles["genres"][g]["description"]
+        if m not in seen_moods and m in profiles["moods"]:
+            seen_moods[m] = profiles["moods"][m]["description"]
+    lines = [f"Genre '{g}': {d}" for g, d in seen_genres.items()]
+    lines += [f"Mood '{m}': {d}" for m, d in seen_moods.items()]
+    return "\n".join(lines)
 
 
 def parse_user_input(text: str, logger: logging.Logger | None = None) -> dict:
@@ -75,8 +115,13 @@ def generate_explanations(
     user_query: str,
     top_songs: list,
     logger: logging.Logger | None = None,
+    enrich: bool = True,
 ) -> list[str]:
-    """RAG step: generate Claude explanations using retrieved song context."""
+    """RAG step: generate Claude explanations using retrieved song context.
+
+    When enrich=True, genre/mood profiles from genre_profiles.json are injected
+    into the context before Claude generates explanations (enhanced RAG).
+    """
     t0 = time.time()
     client = _get_client()
 
@@ -87,9 +132,18 @@ def generate_explanations(
         for i, s in enumerate(top_songs)
     ])
 
+    if enrich:
+        profile_ctx = _build_profile_context(top_songs)
+        if profile_ctx:
+            songs_ctx = (
+                f"Genre & mood reference (use this to write more informed explanations):\n"
+                f"{profile_ctx}\n\n"
+                f"Retrieved songs:\n{songs_ctx}"
+            )
+
     prompt = (
         f'User request: "{user_query}"\n\n'
-        f"Retrieved songs:\n{songs_ctx}\n\n"
+        f"Retrieved context:\n{songs_ctx}\n\n"
         f"Write a numbered explanation for each song in the same order. "
         f"Each should be 1–2 sentences referencing the song's actual features."
     )
@@ -151,6 +205,33 @@ def evaluate_recommendations(
         if logger:
             logger.warning(f"EVAL_PARSE_FAILED | {e}")
         return {"pass": True, "confidence": 0.5, "reason": "Evaluation unavailable"}
+
+
+def rate_explanation_quality(
+    user_query: str,
+    song: dict,
+    explanation: str,
+) -> dict:
+    """Ask Claude to score a single explanation 1–10 for specificity, relevance, helpfulness."""
+    client = _get_client()
+    prompt = (
+        f'User request: "{user_query}"\n'
+        f'Song: "{song["title"]}" by {song["artist"]} ({song["genre"]}, {song["mood"]}, '
+        f'energy={song["energy"]}, tempo={song["tempo_bpm"]} BPM)\n'
+        f'Explanation: "{explanation}"\n\n'
+        f"Rate this explanation."
+    )
+    try:
+        msg = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=100,
+            system=[{"type": "text", "text": RATE_SYSTEM, "cache_control": {"type": "ephemeral"}}],
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = _strip_fences(msg.content[0].text.strip())
+        return json.loads(raw)
+    except Exception:
+        return {"score": 5, "reason": "Rating unavailable"}
 
 
 # ---------------------------------------------------------------------------
