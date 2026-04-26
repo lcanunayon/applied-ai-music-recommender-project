@@ -56,8 +56,8 @@ body, .stApp {
     color: #e2e8f0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-section[data-testid="stMain"] > div { padding-top: 0 !important; }
-.block-container { max-width: 760px; padding: 1rem 1.5rem 3rem; }
+section[data-testid="stMain"] > div { padding-top: 3rem !important; }
+.block-container { max-width: 760px; padding: 2rem 1.5rem 3rem; }
 
 /* ── input ──────────────────────────────────────────────────────────────── */
 .stTextInput input {
@@ -412,10 +412,18 @@ st.markdown(
 if not CLAUDE_AVAILABLE:
     st.markdown(
         """
+        <style>
+          #m4u-chk { display:none }
+          #m4u-chk:checked ~ #m4u-panel { display:block !important }
+          #m4u-info-wrap label { cursor:pointer }
+          #m4u-info-wrap label:hover { transform:scale(1.08); box-shadow:0 6px 22px rgba(124,58,237,0.6) !important }
+        </style>
         <div id="m4u-info-wrap" style="
             position:fixed;bottom:22px;right:22px;z-index:9999;
-            font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif">
-          <div id="m4u-info-panel" style="
+            font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+            display:flex;flex-direction:column;align-items:flex-end">
+          <input type="checkbox" id="m4u-chk">
+          <div id="m4u-panel" style="
               display:none;
               background:rgba(12,12,24,0.97);
               border:1px solid rgba(124,58,237,0.35);
@@ -439,20 +447,16 @@ if not CLAUDE_AVAILABLE:
               NL parsing, explanations &amp; agentic eval.
             </div>
           </div>
-          <button
-            onclick="var p=document.getElementById('m4u-info-panel');
-                     p.style.display=p.style.display==='none'?'block':'none'"
-            title="API status"
-            style="
+          <label for="m4u-chk" title="API status" style="
               width:40px;height:40px;border-radius:50%;
               background:linear-gradient(135deg,#7c3aed,#06b6d4);
               border:none;color:white;font-size:17px;
-              cursor:pointer;float:right;
               box-shadow:0 4px 16px rgba(124,58,237,0.45);
               display:flex;align-items:center;justify-content:center;
-              transition:transform 0.2s,box-shadow 0.2s">
+              transition:transform 0.2s,box-shadow 0.2s;
+              user-select:none">
             ℹ
-          </button>
+          </label>
         </div>
         """,
         unsafe_allow_html=True,
