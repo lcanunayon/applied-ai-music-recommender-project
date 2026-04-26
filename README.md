@@ -2,7 +2,7 @@
 https://github.com/lcanunayon
 
 What this project says about me as an AI Engineer:
-This project showcases my system design principles of sleek and simple, yet powerful and trustworthy at the same time. I aim to create an easy experience for the user, doing all of the heavy lifting in the background. I make sure to test all of my implementations, making sure that they all return the correct output I am looking for. I also take care to make a diagram of the system BEFORE I work on it, as good documentation and a plan is essential in my work as an AI Engineer. All in all, I would say this project showcases due dilligence, modern design principles, and the skill of being able to break down a big problem into manageable parts. 
+This project reflects how I approach AI engineering: designing the system architecture before writing a line of code, building the deterministic layer first so the AI layer is an enhancement rather than a specific dependency, and using tests for both versions in isolation. I chose to implement RAG explicitly -retrieving song features before asking Claude to generate explanations - because I wanted the AI's output grounded in real data, not hallucinations. I added an agentic evaluation loop not because it was required in the project, but because I think AI systems should always try to hold itself accountable for their own outputs. The fallback mode for the API version of the app was a deliberate choice: a system that breaks when an API is unavailable is not production-ready. These decisions reflect a bias towards reliablility over cleverness.
 
 
 # Author Explanation of Project:
