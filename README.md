@@ -1,3 +1,10 @@
+# Portfolio
+https://github.com/lcanunayon
+
+What this project says about me as an AI Engineer:
+This project showcases my system design principles of sleek and simple, yet powerful and trustworthy at the same time. I aim to create an easy experience for the user, doing all of the heavy lifting in the background. I make sure to test all of my implementations, making sure that they all return the correct output I am looking for. I also take care to make a diagram of the system BEFORE I work on it, as good documentation and a plan is essential in my work as an AI Engineer. All in all, I would say this project showcases due dilligence, modern design principles, and the skill of being able to break down a big problem into manageable parts. 
+
+
 # Author Explanation of Project:
 
 My original project which was the CLI version of the music recommender was CLI based with the same scoring logic and ranking as used now. The goal was to making a working CLI prototype music recommender, which I accomplished. The recommender required specific Python commands and changes to the user profile, no plain-text requests were a thing.
