@@ -1,5 +1,6 @@
 # Portfolio
 https://github.com/lcanunayon
+https://lcanunayon.github.io/website/#
 
 # What this project says about me as an AI Engineer:
 This project reflects how I approach AI engineering: designing the system architecture before writing a line of code, building the deterministic layer first so the AI layer is an enhancement rather than a specific dependency, and using tests for both versions in isolation. I chose to implement RAG explicitly -retrieving song features before asking Claude to generate explanations - because I wanted the AI's output grounded in real data, not hallucinations. I added an agentic evaluation loop not because it was required in the project, but because I think AI systems should always try to hold itself accountable for their own outputs. The fallback mode for the API version of the app was a deliberate choice: a system that breaks when an API is unavailable is not production-ready. These decisions reflect a bias towards reliablility over cleverness.
